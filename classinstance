@@ -1,0 +1,29 @@
+// import React from 'react';
+
+
+// class Greeting extends React.Component {
+//   render() {
+//     return <h1>Hello, {this.props.name}!</h1>;
+//   }
+// }
+
+// // Instance of Class Component
+// const App = () => {
+//   return <Greeting name="React" />;
+// };
+
+// export default App;
+import React, { useState } from 'react';
+
+const Greeting = () => {
+  const [name, setName] = useState('React'); // Using useState to store the name
+
+  return <h1>Hello, {name}!</h1>;
+};
+
+const App = () => {
+  return <Greeting />;
+};
+
+export default App;
+
