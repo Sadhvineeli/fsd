@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+import './App.css';
+
+function App() {
+  const [input, setInput] = useState('');
+
+  const handleClick = (value) => setInput(input + value);
+  const handleClear = () => setInput('');
+  const handleBackspace = () => setInput(input.slice(0, -1));
+  const handleCalculate = () => {
+    try {
+      setInput(eval(input).toString());
+    } catch {
+      setInput('Error');
+    }
+  };
+
+  return (
+    <div className="calculator">
+      <div className="display">
+        <div className="input">{input}</div>
+      </div>
+      <div className="buttons">
+        {'123+456-789*0/C←='.split('').map((char) => (
+          <button
+            key={char}
+            onClick={() => char === '=' ? handleCalculate() : char === 'C' ? handleClear() : char === '←' ? handleBackspace() : handleClick(char)}
+          >
+            {char}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
+.calculator {
+  width: 260px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  text-align: right;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+}
+
+
