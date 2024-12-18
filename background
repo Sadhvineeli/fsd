@@ -6,14 +6,14 @@
         #block {
             width: 100px;
             height: 100px;
-            background-color: blue; /* Default color: Blue */
+            background-color: blue; 
     
-            transition: all 0.5s ease; /* Smooth transition */
+            transition: all 0.5s ease; 
         }
 
         .circle {
-            border-radius: 50%; /* Change shape to circle */
-            background-color: red !important; /* Change color to red */
+            border-radius: 50%; 
+            background-color: red !important; 
         }
     </style>
 </head>
