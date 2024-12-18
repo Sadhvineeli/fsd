@@ -16,112 +16,45 @@
 </body> 
 </html> 
 Login.servlet.java 
-/* 
-* To change this license header, choose License Headers in Project Properties. 
-* To change this template file, choose Tools | Templates 
-* and open the template in the editor. 
-*/ 
+ 
 package com.login; 
 import java.io.*; 
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 import java.time.LocalDateTime; 
 import java.time.format.DateTimeFormatter; 
-/** 
-* 
-* 
-@author ADMIN 
-*/ 
-public class LoginServlet extends HttpServlet { 
-/** 
-* Processes requests for both HTTP <code>GET</code> and <code>POST</code> 
-* methods. 
-* 
-* 
-@param request servlet request 
-* 
-@param response servlet response 
-* 
-@throws ServletException if a servlet-specific error occurs 
-* @throws IOException if an I/O error occurs 
-*/ 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
-throws ServletException, IOException { 
-response.setContentType("text/html;charset=UTF-8"); 
-try (PrintWriter out = response.getWriter()) { 
-/* TODO output your page here. You may use following sample code. */ out.println("<!DOCTYPE html>"); 
-out.println("<html>"); 
-out.println("<head>"); 
-out.println("<title>Servlet LoginServlet</title>"); 
-out.println("</head>"); 
-out.println("<body>"); 
-out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>"); 
-out.println("</body>"); 
-out.println("</html>"); 
-} 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code."> 
-/** 
-* Handles the HTTP <code>GET</code> method. 
-* 
-* 
-@param request servlet request 
-* 
-@param response servlet response 
-* 
-@throws ServletException if a servlet-specific error occurs 
-* @throws IOException if an I/O error occurs 
-*/ 
-@Override 
-protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-throws ServletException, IOException { 
-} 
-/** 
-processRequest(request, response); 
-* Handles the HTTP <code>POST</code> method. 
-* 
-* 
-@param request servlet request 
-* 
-@param response servlet response 
-* 
-@throws ServletException if a servlet-specific error occurs 
-* 
-@throws IOException if an I/O error occurs 
-*/ 
-@Override 
+
 protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 throws ServletException, IOException { 
-// Get username and password from the request 
+
 String username= request.getParameter("username"); 
 String password = request.getParameter("password"); 
-// Simple check for valid credentials (for demonstration purposes) 
-if (username != null && !username.isEmpty() && password != null && 
-!password.isEmpty()) { 
-// Store username in session 
-HttpSession session = request.getSession(true); // true means create a new session if one doesn't exist 
+ 
+if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) { 
+ 
+HttpSession session = request.getSession(true);  
 session.setAttribute("username", username); 
-// Set the content type for the response response.setContentType("text/html"); 
-// Create a PrintWriter to send the response PrintWriter out = response.getWriter(); 
-// Get session details 
+response.setContentType("text/html"); 
+ PrintWriter out = response.getWriter(); 
+
 String sessionld = session.getId(); 
 long sessionCreation Time = session.getCreation Time(); 
 long lastAccessedTime = session.getLastAccessedTime(); 
-// Format times to readable format 
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd 
-HH:mm:ss"); 
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
 String sessionCreatedTime = LocalDateTime.ofInstant( 
 new java.util.Date(sessionCreation Time).tolnstant(), java.time.Zoneld.systemDefault() 
 ).format(formatter); 
 String sessionLastAccessedTime = LocalDateTime.ofInstant( 
 new java.util.Date(lastAccessed Time).tolnstant(), java.time.Zoneld.systemDefault() 
 ).format(formatter); 
-// HTML output 
+
 out.println("<html>"); 
 out.println("<head><title>Welcome</title></head>"); 
 out.println("<body>"); 
 out.println("<h2>Welcome " + username + "</h2>"); 
 out.println("<p>Course: FSD</p>"); 
-// Display session details in a table 
+ 
 out.println("<table border='1'>"); 
 out.println("<tr><th>Session Detail</th><th>Value</th></tr>"); 
 out.println("<tr><td>Session ID</td><td>" + sessionld + "</td></tr>"); 
@@ -132,14 +65,14 @@ out.println("<tr><td>Last Accessed Time</td><td>" + sessionLastAccessed Time +
 } 
 /** 
 out.println("</table>"); 
-// Logout button 
+
 out.println("<form action='LogoutServlet' method='post'>"); out.println("<input type='submit' value='Logout'>"); 
 out.println("</form>"); 
 out.println("</body>"); 
 out.println("</html>"); 
 } else { 
 } 
-// Invalid login credentials 
+ 
 response.send Redirect("login.html"); 
 * Returns a short description of the servlet. 
 * 
@@ -152,100 +85,35 @@ return "Short description";
 </editor-fold> 
 } 
 Logoutservlet.java 
-/* 
-* 
-To change this license header, choose License Headers in Project Properties. 
-* To change this template file, choose Tools | Templates 
-* and open the template in the editor. 
-*/ 
+
 package com.login; 
 import java.io.*; 
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 import java.time.Duration; 
 import java.time.Instant; 
-/** 
-* 
-* 
-@author ADMIN 
-*/ 
-public class LogoutServlet extends HttpServlet { 
-/** 
-* Processes requests for both HTTP <code>GET</code> and <code>POST</code> 
-* methods. 
-* 
-* 
-@param request servlet request 
-* 
-@param response servlet response 
-* 
-@throws ServletException if a servlet-specific error occurs 
-* 
-*/ 
-@throws IOException if an I/O error occurs 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response) 
-throws ServletException, IOException { 
-response.setContentType("text/html;charset=UTF-8"); 
-= 
-try (PrintWriter out response.getWriter()) { 
-} 
-/* TODO output your page here. You may use following sample code. */ out.println("<!DOCTYPE html>"); 
-out.println("<html>"); 
-out.println("<head>"); 
-out.println("<title>Servlet LogoutServlet</title>"); 
-out.println("</head>"); 
-out.println("<body>"); 
-out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>"); out.println("</body>"); 
-out.println("</html>"); 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code."> 
-/** 
-* Handles the HTTP <code>GET</code> method. 
-* 
-* 
-@param request servlet request 
-* 
-@param response servlet response 
-* 
-@throws ServletException if a servlet-specific error occurs 
-* @throws IOException if an I/O error occurs 
-*/ 
-@Override 
-protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-throws ServletException, IOException { 
-processRequest(request, response); 
-} 
-/** 
-* Handles the HTTP <code>POST</code> method. 
-* 
-* 
-@param request servlet request 
-* 
-* 
-* 
-*/ 
-@param response servlet response 
-@throws ServletException if a servlet-specific error occurs 
-@throws IOException if an I/O error occurs 
-@Override 
+
 protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 throws ServletException, IOException { 
-// Get the session 
+
 HttpSession session = request.getSession(false); 
 if (session != null) { 
-// Get the start time (session creation time) 
+
 String username = (String) session.getAttribute("username"); 
-long sessionCreation Time = session.getCreation Time(); Instant startTime = Instant.ofEpoch Milli(sessionCreation Time); Instant endTime = Instant.now(); 
+long sessionCreation Time = session.getCreation Time(); 
+Instant startTime = Instant.ofEpoch Milli(sessionCreation Time); 
+Instant endTime = Instant.now(); 
 Duration activeDuration= Duration.between(startTime, endTime); 
-// Invalidate session 
+
 session.invalidate(); 
-// Set content type and response writer response.setContentType("text/html"); PrintWriter out = response.getWriter(); 
-// Display logout message and active time in seconds out.println("<html>"); 
+ response.setContentType("text/html");
+PrintWriter out = response.getWriter(); 
+out.println("<html>"); 
 out.println("<head><title>Thank You</title> </head>"); 
 out.println("<body>"); 
 out.println("<h2>Thank You " + username + "</h2>"); 
-// Output active session duration in seconds 
-out.println("<p>Your active session lasted: " + activeDuration.getSeconds() + 
-seconds.</p>"); 
+
+out.println("<p>Your active session lasted: " + activeDuration.getSeconds() + seconds.</p>"); 
 " 
 out.println("</body>"); 
 } 
@@ -253,7 +121,7 @@ out.println("</body>");
 out.println("</html>"); 
 } else { 
 } 
-// If no session found, redirect to login page 
+
 response.send Redirect("login.html"); 
 * Returns a short description of the servlet. 
 * 
@@ -261,31 +129,4 @@ response.send Redirect("login.html");
 @return a String containing servlet description 
 */ 
 } 
-@Override 
-public String getServletInfo() { return "Short description"; }// </editor-fold> 
-Web.xml 
-<?xml version="1.0" encoding="UTF-8"?> 
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"> 
-<servlet> 
-<servlet-name>LoginServlet</servlet-name> 
-<servlet-class>com.login.LoginServlet</servlet-class> 
-</servlet> 
-<servlet> 
-<servlet-name>LogoutServlet</servlet-name> 
-<servlet-class>com.login.LogoutServlet</servlet-class> 
-</servlet> 
-<servlet-mapping> 
-<servlet-name>LoginServlet</servlet-name> 
-<url-pattern>/LoginServlet</url-pattern> 
-</servlet-mapping> 
-<servlet-mapping> 
-<servlet-name>LogoutServlet</servlet-name> 
-<url-pattern>/LogoutServlet</url-pattern> 
-</servlet-mapping> 
-<session-config> 
-<session-timeout> 
-30 
-</session-timeout> 
-</session-config> 
-</web-app> 
+
