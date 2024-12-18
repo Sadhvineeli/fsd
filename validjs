@@ -29,13 +29,12 @@
         <input type="submit" value="Register">
     </form>
 
-    <script src="scripttt.js"></script> <!-- Link to external JavaScript file -->
+    <script src="scripttt.js"></script> 
 </body>
 </html>
 document.getElementById("registrationForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    // Clear previous error messages
+    event.preventDefault();
+  
     document.getElementById("usernameError").textContent = "";
     document.getElementById("passwordError").textContent = "";
     document.getElementById("emailError").textContent = "";
@@ -48,46 +47,46 @@ document.getElementById("registrationForm").addEventListener("submit", function(
     let dob = document.getElementById("dob").value;
     let contact = document.getElementById("contact").value;
 
-    // Regular expressions for validation
+
     let usernamePattern = /^[a-zA-Z0-9]{8,16}$/;
     let passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\*\$#])[a-zA-Z0-9\*\$#]{8,16}$/;
     let emailPattern = /^[a-zA-Z]+@(gmail|hotmail|rediffmail)\.com$/;
     let dobPattern = /^\d{2}-\d{2}-\d{4}$/; // dd-mm-yyyy
     let contactPattern = /^\d+$/; // Numbers only
 
-    let valid = true; // Flag to track if form is valid
+    let valid = true; 
 
-    // Username validation
+   
     if (!usernamePattern.test(username)) {
         document.getElementById("usernameError").textContent = "Username must be 8-16 characters long, containing only letters and numbers.";
         valid = false;
     }
 
-    // Password validation
+ 
     if (!passwordPattern.test(password)) {
         document.getElementById("passwordError").textContent = "Password must be 8-16 characters long, containing at least one letter, one number, and one symbol (*, $, #).";
         valid = false;
     }
 
-    // Email validation
+   
     if (!emailPattern.test(email)) {
         document.getElementById("emailError").textContent = "Email must be in the form 'alphabet@gmail.com'.";
         valid = false;
     }
 
-    // Date of Birth validation
+   
     if (!dobPattern.test(dob)) {
         document.getElementById("dobError").textContent = "Date of Birth must be in the format dd-mm-yyyy.";
         valid = false;
     }
 
-    // Contact Number validation
+  
     if (!contactPattern.test(contact)) {
         document.getElementById("contactError").textContent = "Contact number must contain numbers only.";
         valid = false;
     }
 
-    // If all fields are valid, show a success message
+  
     if (valid) {
         alert("Registration successful!");
     }
